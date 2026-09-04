@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Account Servicing Agent API, a governed Xano backend for people and agents</title>
+    <meta
+      name="description"
+      content="A governed banking servicing API where a human ops user and an AI agent call the same permissioned, audited endpoints and are held to the same authority limit."
+    />
+    <style>
+      :root {
+        --bg: #0b0d10;
+        --surface: #14171c;
+        --surface-2: #1a1e24;
+        --border: #262b33;
+        --text: #e8eaed;
+        --muted: #9aa4b2;
+        --primary: #6ea8fe;
+        --primary-ink: #0b0d10;
+        --allow: #34d399;
+        --refuse: #f87171;
+        --radius: 12px;
+      }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+      .wrap { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+      header.site { padding: 28px 0 8px; }
+      .brand { display: flex; align-items: center; gap: 12px; font-weight: 600; }
+      .brand .mark {
+        width: 34px; height: 34px; border-radius: 8px;
+        background: linear-gradient(160deg, #2b3240, #171b21);
+        border: 1px solid var(--border);
+        display: grid; place-items: center; font-size: 18px;
+      }
+      .hero { padding: 40px 0 8px; }
+      .badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+      .badge {
+        font-size: 12px; font-weight: 600; letter-spacing: .02em;
+        padding: 5px 10px; border-radius: 999px;
+        background: var(--surface-2); border: 1px solid var(--border); color: var(--muted);
+      }
+      .badge.play { color: var(--primary); border-color: #2c3d5e; background: #10192b; }
+      h1 { font-size: 40px; line-height: 1.12; margin: 0 0 14px; letter-spacing: -.02em; }
+      .tagline { font-size: 19px; color: var(--muted); max-width: 46em; margin: 0 0 18px; }
+      .meta { font-size: 14px; color: var(--muted); margin: 0 0 22px; }
+      .meta strong { color: var(--text); font-weight: 600; }
+      .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+      .btn {
+        display: inline-flex; align-items: center; gap: 8px;
+        padding: 11px 18px; border-radius: 10px; font-weight: 600; font-size: 15px;
+        text-decoration: none; border: 1px solid transparent; transition: transform .05s ease, background .15s ease;
+      }
+      .btn:active { transform: translateY(1px); }
+      .btn.primary { background: var(--primary); color: var(--primary-ink); }
+      .btn.primary:hover { background: #86b7ff; }
+      .btn.ghost { background: transparent; color: var(--text); border-color: var(--border); }
+      .btn.ghost:hover { border-color: #3a424e; background: var(--surface); }
+      .shot {
+        margin: 34px 0 8px; border: 1px solid var(--border); border-radius: var(--radius);
+        overflow: hidden; background: var(--surface); box-shadow: 0 20px 60px -30px rgba(0,0,0,.8);
+      }
+      .shot img { display: block; width: 100%; height: auto; }
+      .shot figcaption { padding: 12px 16px; font-size: 13px; color: var(--muted); border-top: 1px solid var(--border); }
+      section { padding: 30px 0; border-top: 1px solid var(--border); margin-top: 26px; }
+      section:first-of-type { border-top: none; margin-top: 0; }
+      h2 { font-size: 24px; margin: 0 0 14px; letter-spacing: -.01em; }
+      p { color: #cdd3db; }
+      ol.rules { padding-left: 20px; }
+      ol.rules li { margin-bottom: 8px; }
+      code, .mono { font-family: "SF Mono", ui-monospace, "Cascadia Code", Menlo, Consolas, monospace; font-size: .92em; }
+      .rule-name { color: var(--refuse); }
+      table { width: 100%; border-collapse: collapse; font-size: 14px; }
+      th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+      th { color: var(--muted); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: .04em; }
+      td .verb { font-weight: 700; color: var(--primary); }
+      .grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); }
+      .cardlet { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; }
+      .cardlet h3 { margin: 0 0 6px; font-size: 15px; }
+      .cardlet p { margin: 0; font-size: 14px; color: var(--muted); }
+      pre {
+        background: #0e1116; border: 1px solid var(--border); border-radius: var(--radius);
+        padding: 16px; overflow-x: auto; font-size: 13.5px; line-height: 1.55; color: #d7dee8;
+      }
+      .note { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--primary); border-radius: 8px; padding: 14px 16px; color: var(--muted); font-size: 14px; }
+      footer { padding: 40px 0 60px; color: var(--muted); font-size: 13px; border-top: 1px solid var(--border); margin-top: 26px; }
+      @media (max-width: 620px) { h1 { font-size: 30px; } .tagline { font-size: 17px; } }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="site">
+        <div class="brand"><span class="mark">&#127974;</span> Account Servicing Agent API</div>
+      </header>
+
+      <div class="hero">
+        <div class="badges">
+          <span class="badge play">Play 4 &middot; Agent Intelligence Layer</span>
+          <span class="badge">Banking</span>
+          <span class="badge">API-layer RBAC</span>
+          <span class="badge">Xano + TypeScript</span>
+        </div>
+        <h1>One rule layer for a person and an agent</h1>
+        <p class="tagline">
+          A governed banking servicing API where a human ops user and an AI agent call the same
+          permissioned, audited endpoints. An over-limit transfer is refused the same way for both,
+          and every attempt lands in one audit trail.
+        </p>
+        <p class="meta"><strong>5 tables</strong> &middot; <strong>10 API endpoints</strong> &middot; <strong>1 rule function</strong> &middot; <strong>1 AI agent</strong></p>
+        <div class="hero-actions">
+          <a class="btn primary" href="https://github.com/xano-scratch/account-servicing-agent-api">View on GitHub</a>
+          <a class="btn ghost" href="#use">Use this template</a>
+        </div>
+      </div>
+
+      <figure class="shot">
+        <img src="screenshot.png" alt="Audit trail: a human teller and an AI agent are both refused the same over-limit transfer while a supervisor is allowed, with every attempt logged and the rule that fired named" />
+        <figcaption>The audit trail. The same over-limit transfer is refused for the teller and the agent, and allowed for the supervisor, all through one rule layer.</figcaption>
+      </figure>
+
+      <section>
+        <h2>What it demonstrates</h2>
+        <p>
+          An agent that can move customer money is only safe if it obeys the same limits a person does.
+          This backend puts every money movement behind one rule layer. A teller, a supervisor, and an
+          AI agent all call the same endpoints, and each is held to the authority limit that rides on
+          their own token.
+        </p>
+        <p>
+          The rule lives in one place, not copied into each caller. When the agent asks to move more than
+          its limit allows, it is refused by the exact same code path that refuses a person. Access is
+          API-layer role-based access control (an auth table, minted tokens, and per-endpoint role
+          checks). It is not row-level security.
+        </p>
+      </section>
+
+      <section>
+        <h2>The one rule layer</h2>
+        <p>Every transfer and hold runs through a single Xano function, <code>servicing_action</code>. It loads the actor, reads their authority limit, then checks three things in order:</p>
+        <ol class="rules">
+          <li>the account must be active, or the attempt is refused as <code class="rule-name">account_frozen</code></li>
+          <li>the amount must be within the actor's authority limit, or <code class="rule-name">over_authority_limit</code></li>
+          <li>the amount must fit the available balance (balance minus holds), or <code class="rule-name">insufficient_available_balance</code></li>
+        </ol>
+        <p>
+          On an allow it moves the money and writes a posted transaction. On a refuse it writes a refused
+          transaction. Either way it writes one audit row with the actor kind, the outcome, and the rule
+          that fired. The transfer endpoint, the hold endpoint, and the agent endpoint all call this same
+          function.
+        </p>
+      </section>
+
+      <section>
+        <h2>API surface</h2>
+        <table>
+          <thead>
+            <tr><th>Verb</th><th>Path</th><th>What it enforces</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="verb">POST</span></td><td class="mono">/api:asa_auth/login</td><td>Authenticates an actor and mints a token that carries their role and authority limit. Same path for a human and an agent.</td></tr>
+            <tr><td><span class="verb">GET</span></td><td class="mono">/api:asa_auth/actors</td><td>Lists the actors for the demo picker. Never returns the password column.</td></tr>
+            <tr><td><span class="verb">GET</span></td><td class="mono">/api:asa_servicing/accounts</td><td>Lists accounts. Any authenticated actor.</td></tr>
+            <tr><td><span class="verb">GET</span></td><td class="mono">/api:asa_servicing/account/{account_id}</td><td>One account, with available balance computed on the server.</td></tr>
+            <tr><td><span class="verb">POST</span></td><td class="mono">/api:asa_servicing/transfer</td><td>Account status, then authority limit, then available balance, before it moves money.</td></tr>
+            <tr><td><span class="verb">POST</span></td><td class="mono">/api:asa_servicing/hold</td><td>The same checks. Reserves funds instead of sending them.</td></tr>
+            <tr><td><span class="verb">POST</span></td><td class="mono">/api:asa_servicing/release-hold</td><td>Supervisor role only, enforced with a precondition.</td></tr>
+            <tr><td><span class="verb">GET</span></td><td class="mono">/api:asa_audit/actions</td><td>The governance trail, newest first, filterable by account or actor kind.</td></tr>
+            <tr><td><span class="verb">POST</span></td><td class="mono">/api:asa_agent/run</td><td>Parses a plain-language request, then runs it through the same rule layer under the agent's own limit.</td></tr>
+            <tr><td><span class="verb">POST</span></td><td class="mono">/api:asa_admin/seed</td><td>Resets and seeds the demo so every screen is browsable.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>Frontend screens</h2>
+        <div class="grid">
+          <div class="cardlet"><h3>Servicing console</h3><p>Pick an actor, run a transfer or hold, and watch the rule layer allow or refuse it with the exact reason.</p></div>
+          <div class="cardlet"><h3>Agent panel</h3><p>Type a plain-language request. The agent parses it and runs it under its own authority limit.</p></div>
+          <div class="cardlet"><h3>Audit trail</h3><p>Every attempt, human and agent, with the actor kind, the outcome, and the rule that fired.</p></div>
+          <div class="cardlet"><h3>Accounts</h3><p>Balances, held amounts, and available balance for each account.</p></div>
+        </div>
+      </section>
+
+      <section id="use">
+        <h2>Use this template</h2>
+        <p>Clone it and get a live copy on your own Xano account in a minute:</p>
+        <pre><code>git clone https://github.com/xano-scratch/account-servicing-agent-api.git
+cd account-servicing-agent-api
+npm install
+npx xanots login        # one-time browser sign-in
+npm run xano:deploy     # deploys backend + frontend, seeds data, prints the live URL</code></pre>
+        <p>Or hand this prompt to a coding agent:</p>
+        <pre><code>Clone https://github.com/xano-scratch/account-servicing-agent-api and get it
+running live. Run npm install, then npx xanots login, then npm run xano:deploy.
+Open the printed URL and confirm the audit trail shows a human teller and an AI
+agent both refused the same over-limit transfer, while a supervisor is allowed.</code></pre>
+        <p>Every actor signs in with the shared demo password <code>servicing-demo</code>. It is demo data, not a secret.</p>
+      </section>
+
+      <section>
+        <h2>Live preview</h2>
+        <div class="note">
+          The build ships with an ephemeral preview environment. It expires, so the links in the build
+          notes may be gone by the time you read this. The durable artifact is this repo. Re-deploy with
+          <code>npm run xano:deploy</code> for fresh links. This is a scratch proof artifact that runs on
+          seed data, not a live production system.
+        </div>
+      </section>
+
+      <footer>
+        Built with Xano and TypeScript using <span class="mono">@xanots/sdk</span>. The frontend derives
+        its paths and types from the backend query defs, so the client and server do not drift.
+      </footer>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,83 @@
+{
+  "version": 1,
+  "objects": {
+    "app:admin": {
+      "guid": "62a2658b57218b8d4e939a0fa78aefd9",
+      "canonical": "asa_admin",
+      "canonical_source": "code"
+    },
+    "app:agent": {
+      "guid": "8fe6c1adc68a153ab4b46550a7faf4b3",
+      "canonical": "asa_agent",
+      "canonical_source": "code"
+    },
+    "app:audit": {
+      "guid": "cad4174a6426a42a1e453b38ee821110",
+      "canonical": "asa_audit",
+      "canonical_source": "code"
+    },
+    "app:auth": {
+      "guid": "4fe67f5a2d319eaaca7996700f27edd8",
+      "canonical": "asa_auth",
+      "canonical_source": "code"
+    },
+    "app:servicing": {
+      "guid": "70204875c4d808c06fc319bc246e3b86",
+      "canonical": "asa_servicing",
+      "canonical_source": "code"
+    },
+    "dbo:accounts": {
+      "guid": "d79ee2e0226ccb53c0abc59b83e4ac40"
+    },
+    "dbo:agents": {
+      "guid": "683d8434f0dd752066da3931cea8c741"
+    },
+    "dbo:audit_actions": {
+      "guid": "0cd759e2506b7801eea0b9b938fdf29b"
+    },
+    "dbo:customers": {
+      "guid": "e7b073506cc02642649907152fe5bedf"
+    },
+    "dbo:transactions": {
+      "guid": "2a5b3c18b00ba6132fb855f1a2686ac8"
+    },
+    "function:servicing_action": {
+      "guid": "94ca2a502e136a7c685a64dd55f4f854"
+    },
+    "query:admin|POST|seed": {
+      "guid": "9d34676e1813184f90413b2367acfa32"
+    },
+    "query:agent|POST|run": {
+      "guid": "b0c85234edf679cfd48c6326f18a725c"
+    },
+    "query:audit|GET|actions": {
+      "guid": "2c5c71798b4c972d9266c8ee9e13ea3f"
+    },
+    "query:auth|GET|actors": {
+      "guid": "21f3ec8889d17a54ac7b2ca59a337a93"
+    },
+    "query:auth|POST|login": {
+      "guid": "d39d74f907baeb484e9c93358362998a"
+    },
+    "query:servicing|GET|account/{account_id}": {
+      "guid": "2835b87b8ea5abe72ca6f2df67515b70"
+    },
+    "query:servicing|GET|accounts": {
+      "guid": "18b9d1940f5df38e1b36ea18f8dc1a94"
+    },
+    "query:servicing|POST|hold": {
+      "guid": "4818cd0a42f2b187c8bac22a1573b074"
+    },
+    "query:servicing|POST|release-hold": {
+      "guid": "1bf0a69678a1f4b2f2e94bbbe91dc1b7"
+    },
+    "query:servicing|POST|transfer": {
+      "guid": "0aba3c2716df54d60c6707494259c374"
+    },
+    "toolset:servicing_parser": {
+      "guid": "3690f750f2482b9aa4eb946ddeab2d65",
+      "canonical": "6PnziDu7",
+      "canonical_source": "minted"
+    }
+  }
+}
